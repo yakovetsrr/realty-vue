@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.homePage">
     <HomeSlider />
   </div>
 </template>
@@ -16,4 +16,8 @@ export default defineComponent({
 })
 </script>
 
-<style module></style>
+<style module>
+.homePage {
+  margin-top: -90px;
+}
+</style>

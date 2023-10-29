@@ -11,8 +11,14 @@ export default defineComponent({
 <template>
   <div>
     <DefaultHeader />
-    <RouterView />
+    <div :class="$style.page">
+      <RouterView />
+    </div>
   </div>
 </template>
 
-<style module></style>
+<style module>
+.page {
+  margin-top: 90px;
+}
+</style>
