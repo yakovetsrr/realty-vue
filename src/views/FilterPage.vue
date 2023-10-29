@@ -105,7 +105,7 @@ export default defineComponent({
       </VExpansionPanel>
     </VExpansionPanels>
     <div :class="$style.filterResults">
-      <div :class="$style.test">
+      <div :class="$style.divSelect">
         <VSelect
           :class="$style.select"
           :items="sortOptions"
@@ -117,6 +117,60 @@ export default defineComponent({
         <label>Карточка</label>
         <VSwitch />
         <label>Список</label>
+      </div>
+    </div>
+    <div :class="$style.cardContainer">
+      <div :class="$style.cardFlatContent">
+        <span>Ключи в 2025 года</span>
+        <span>2 этаж</span>
+        <div :class="$style.divCardImg">
+          <img
+            src="../assets/img.png"
+            :class="$style.img"
+          />
+        </div>
+        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
+        <span>Номер квартиры 14</span>
+        <span :class="$style.costText">14 768 000 Р</span>
+      </div>
+      <div :class="$style.cardFlatContent">
+        <span>Ключи в 2025 года</span>
+        <span>2 этаж</span>
+        <div :class="$style.divCardImg">
+          <img
+            src="../assets/img.png"
+            :class="$style.img"
+          />
+        </div>
+        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
+        <span>Номер квартиры 14</span>
+        <span :class="$style.costText">14 768 000 Р</span>
+      </div>
+      <div :class="$style.cardFlatContent">
+        <span>Ключи в 2025 года</span>
+        <span>2 этаж</span>
+        <div :class="$style.divCardImg">
+          <img
+            src="../assets/img.png"
+            :class="$style.img"
+          />
+        </div>
+        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
+        <span>Номер квартиры 14</span>
+        <span :class="$style.costText">14 768 000 Р</span>
+      </div>
+      <div :class="$style.cardFlatContent">
+        <span>Ключи в 2025 года</span>
+        <span>2 этаж</span>
+        <div :class="$style.divCardImg">
+          <img
+            src="../assets/img.png"
+            :class="$style.img"
+          />
+        </div>
+        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
+        <span>Номер квартиры 14</span>
+        <span :class="$style.costText">14 768 000 Р</span>
       </div>
     </div>
   </div>
@@ -156,20 +210,57 @@ export default defineComponent({
 }
 
 .filterResults {
-  padding-top: 12px;
+  padding: 12px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.test {
+.divSelect {
   width: 200px;
 }
 
 .switch {
   width: 200px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardFlatContent {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 330px;
+  border-radius: 6px;
+  border: 1px solid black;
+  padding: 18px 20px;
+}
+
+.cardFlat {
+  height: 400px;
+  width: 330px;
+  border-radius: 3px;
+}
+
+.costText {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.divCardImg {
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+.img {
+  width: 70%;
+  height: 90%;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
 }
 </style>
