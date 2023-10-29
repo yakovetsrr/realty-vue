@@ -3,15 +3,30 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'FilterPage',
+  data() {
+    return {
+      flatOptions: ['Квартира', 'Апартаменты'],
+      doneOptions: ['Вторичка', 'Новостройка'],
+      finishingOptions: ['Черновая отделка', 'Чистовая отделка'],
+      viewWindowOptios: ['Во двор', 'На улицу'],
+      sortOptions: [
+        'По росту стоимости',
+        'По убыванию стоимости',
+        'По росту площади',
+        'По убыванию стоимосит',
+      ],
+    }
+  },
 })
 </script>
 
 <template>
-  <div>
+  <div :class="$style.container">
     <div :class="$style.filterPage">
       <div :class="$style.filter">
         <VSelect
           :class="$style.select"
+          :items="flatOptions"
           label="Тип недвижимости"
         />
         <VBtn>1</VBtn>
@@ -57,14 +72,17 @@ export default defineComponent({
           <div :class="$style.expationPanelText">
             <VSelect
               :class="$style.select"
+              :items="doneOptions"
               label="Готовность"
             />
             <VSelect
               :class="$style.select"
+              :items="finishingOptions"
               label="Отделка"
             />
             <VSelect
               :class="$style.select"
+              :items="viewWindowOptios"
               label="Вид из окна"
             />
             <div :class="$style.slider">
@@ -86,24 +104,39 @@ export default defineComponent({
         </VExpansionPanelText>
       </VExpansionPanel>
     </VExpansionPanels>
+    <div :class="$style.filterResults">
+      <div :class="$style.test">
+        <VSelect
+          :class="$style.select"
+          :items="sortOptions"
+          label="Сортировать"
+        />
+      </div>
+      <span> 10 квартир</span>
+      <div :class="$style.switch">
+        <label>Карточка</label>
+        <VSwitch />
+        <label>Список</label>
+      </div>
+    </div>
   </div>
 </template>
 
 <style module>
 .select {
-  width: 250px;
+  width: 330px;
 }
 .filterPage {
-  padding-top: 12px;
+  padding: 12px 12px;
 }
 
 .filter {
   display: inline-flex;
-  justify-content: start;
-  gap: 14px;
+  justify-content: center;
+  gap: 18px;
 }
 .divSlider {
-  width: 250px;
+  width: 50%;
 }
 .divInput {
   display: flex;
@@ -114,7 +147,29 @@ export default defineComponent({
 }
 .expationPanelText {
   display: inline-flex;
-  justify-content: start;
+  justify-content: center;
   gap: 14px;
+}
+.container {
+  margin: 0 auto;
+  width: 1460px;
+}
+
+.filterResults {
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.test {
+  width: 200px;
+}
+
+.switch {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
