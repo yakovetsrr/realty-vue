@@ -46,6 +46,7 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   padding: 30px;
+  width: 100%;
   height: 90px;
   border-bottom: 1px solid black;
 }
