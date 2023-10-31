@@ -1,7 +1,11 @@
 <template>
   <div :class="$style.homePageFiler">
+    <span :class="$style.filterTitel">Выбрать квартиру</span>
     <div :class="$style.filter">
-      <VSelect label="Тип недвижимости" />
+      <VSelect
+        :class="$style.select"
+        label="Тип недвижимости"
+      />
       <VBtn>1</VBtn>
       <VBtn>2</VBtn>
       <VBtn>3</VBtn>
@@ -14,11 +18,12 @@
             value="100"
           />
           <input
+            :class="$style.inputSlider"
             type="text"
             value="200"
           />
         </div>
-        <VRangeSlider />
+        <VRangeSlider :class="$style.slider" />
       </div>
       <div>
         <label>Площадь, м2</label>
@@ -28,13 +33,19 @@
             value="1"
           />
           <input
+            :class="$style.inputSlider"
             type="text"
             value="2"
           />
         </div>
-        <VRangeSlider />
+        <VRangeSlider :class="$style.slider" />
       </div>
-      <vBtn>Показать</vBtn>
+      <RouterLink
+        :class="$style.routerlink"
+        to="/filter"
+      >
+        Показать
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -43,11 +54,8 @@
 <style module>
 .homePageFiler {
   padding: 12px 12px;
-  margin-top: 3px;
-  border-radius: 20px;
-  border-width: 3px;
-  border-color: black;
-  border-style: solid;
+  margin: 12px auto;
+  width: 1460px;
 }
 .filter {
   display: inline-flex;
@@ -58,5 +66,28 @@
 
 .select {
   width: 330px;
+}
+
+.inputSlider {
+  text-align: right;
+}
+
+.slider {
+  width: 360px;
+}
+
+.filterTitel {
+  font-size: 34px;
+}
+
+.routerlink {
+  width: 200px;
+  height: 60px;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  border-radius: 8px;
 }
 </style>
