@@ -3,6 +3,7 @@
     <HomeSlider />
     <HomePageFilter />
     <HomePageOnlineDealPreview />
+    <HomeMakeAnAppointment />
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import { defineComponent } from 'vue'
 import HomeSlider from '../components/HomeSlider.vue'
 import HomePageFilter from '../components/HomePageFilter.vue'
 import HomePageOnlineDealPreview from '../components/HomePageOnlineDealPreview.vue'
+import HomeMakeAnAppointment from '../components/HomeMakeAnAppointment.vue'
 
 export default defineComponent({
   name: 'HomePage',
@@ -18,6 +20,7 @@ export default defineComponent({
     HomeSlider,
     HomePageFilter,
     HomePageOnlineDealPreview,
+    HomeMakeAnAppointment,
   },
 })
 </script>

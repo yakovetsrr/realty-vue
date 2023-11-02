@@ -53,6 +53,7 @@
   display: flex;
   justify-content: space-between;
   height: 700px;
+  background-color: #f5f5f5;
 }
 .leftBlock {
   display: flex;
@@ -91,7 +92,6 @@
 
 .topRightTextBlock {
   border-radius: 12px;
-  background-color: #f5f5f5;
   padding: 20px;
   height: 30%;
   width: 82%;
