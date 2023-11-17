@@ -1,25 +1,3 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'FilterPage',
-  data() {
-    return {
-      flatOptions: ['Квартира', 'Апартаменты'],
-      doneOptions: ['Вторичка', 'Новостройка'],
-      finishingOptions: ['Черновая отделка', 'Чистовая отделка'],
-      viewWindowOptios: ['Во двор', 'На улицу'],
-      sortOptions: [
-        'По росту стоимости',
-        'По убыванию стоимости',
-        'По росту площади',
-        'По убыванию стоимосит',
-      ],
-    }
-  },
-})
-</script>
-
 <template>
   <div :class="$style.container">
     <div :class="$style.filterPage">
@@ -120,61 +98,37 @@ export default defineComponent({
       </div>
     </div>
     <div :class="$style.cardContainer">
-      <div :class="$style.cardFlatContent">
-        <span>Ключи в 2025 года</span>
-        <span>2 этаж</span>
-        <div :class="$style.divCardImg">
-          <img
-            src="../assets/img.png"
-            :class="$style.img"
-          />
-        </div>
-        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
-        <span>Номер квартиры 14</span>
-        <span :class="$style.costText">14 768 000 Р</span>
-      </div>
-      <div :class="$style.cardFlatContent">
-        <span>Ключи в 2025 года</span>
-        <span>2 этаж</span>
-        <div :class="$style.divCardImg">
-          <img
-            src="../assets/img.png"
-            :class="$style.img"
-          />
-        </div>
-        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
-        <span>Номер квартиры 14</span>
-        <span :class="$style.costText">14 768 000 Р</span>
-      </div>
-      <div :class="$style.cardFlatContent">
-        <span>Ключи в 2025 года</span>
-        <span>2 этаж</span>
-        <div :class="$style.divCardImg">
-          <img
-            src="../assets/img.png"
-            :class="$style.img"
-          />
-        </div>
-        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
-        <span>Номер квартиры 14</span>
-        <span :class="$style.costText">14 768 000 Р</span>
-      </div>
-      <div :class="$style.cardFlatContent">
-        <span>Ключи в 2025 года</span>
-        <span>2 этаж</span>
-        <div :class="$style.divCardImg">
-          <img
-            src="../assets/img.png"
-            :class="$style.img"
-          />
-        </div>
-        <span>1-комнатная квартира 35,2 м<sup>2</sup></span>
-        <span>Номер квартиры 14</span>
-        <span :class="$style.costText">14 768 000 Р</span>
-      </div>
+      <RealtyObjectCard />
+      <RealtyObjectCard />
+      <RealtyObjectCard />
+      <RealtyObjectCard />
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import RealtyObjectCard from '@/components/RealtyObjectCard.vue'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'FilterPage',
+  components: { RealtyObjectCard },
+  data() {
+    return {
+      flatOptions: ['Квартира', 'Апартаменты'],
+      doneOptions: ['Вторичка', 'Новостройка'],
+      finishingOptions: ['Черновая отделка', 'Чистовая отделка'],
+      viewWindowOptios: ['Во двор', 'На улицу'],
+      sortOptions: [
+        'По росту стоимости',
+        'По убыванию стоимости',
+        'По росту площади',
+        'По убыванию стоимосит',
+      ],
+    }
+  },
+})
+</script>
 
 <style module>
 .select {
@@ -225,37 +179,6 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.cardFlatContent {
-  display: flex;
-  flex-direction: column;
-  height: 400px;
-  width: 330px;
-  border-radius: 6px;
-  border: 1px solid black;
-  padding: 18px 20px;
-}
-
-.cardFlat {
-  height: 400px;
-  width: 330px;
-  border-radius: 3px;
-}
-
-.costText {
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.divCardImg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.img {
-  width: 70%;
-  height: 90%;
 }
 
 .cardContainer {
