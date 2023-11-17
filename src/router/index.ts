@@ -8,14 +8,17 @@ const routes = [
       {
         path: '',
         name: 'Home',
-        component: () =>
-          import(/* webpackChunkName: "home" */ '@/views/HomePage.vue'),
+        component: () => import('@/views/HomePage.vue'),
       },
       {
         path: '/filter',
         name: 'Filter',
-        component: () =>
-          import(/* webpackChunkName: "home" */ '@/views/FilterPage.vue'),
+        component: () => import('@/views/FilterPage.vue'),
+      },
+      {
+        path: '/filter/:id',
+        name: 'FilterDetails',
+        component: () => import('@/views/FilterDetailsPage.vue'),
       },
     ],
   },
