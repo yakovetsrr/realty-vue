@@ -31,9 +31,6 @@
   padding: 2.8rem;
   border-radius: 0.8rem;
   background-color: #f5f5f8;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 </style>
