@@ -11,6 +11,7 @@
 .wrapper {
   display: flex;
   gap: 12px;
+  width: 400px;
 }
 .roomsBtn {
   height: 56px !important;

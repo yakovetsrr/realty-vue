@@ -44,11 +44,6 @@
             :items="viewWindowOptios"
             label="Тип недвижимости"
           />
-          <VSelect
-            :class="$style.select"
-            :items="viewWindowOptios"
-            label="Тип недвижимости"
-          />
         </div>
       </div>
     </BaseCollapse>
@@ -125,7 +120,7 @@ export default defineComponent({
 <style module>
 .container {
   margin: 0 auto;
-  width: 1560px;
+  width: 1660px;
 }
 
 .filterPage {
@@ -139,8 +134,8 @@ export default defineComponent({
 }
 
 .select {
-  width: 330px;
-  max-width: 330px;
+  width: 400px;
+  max-width: 400px;
   height: 56px;
 }
 
