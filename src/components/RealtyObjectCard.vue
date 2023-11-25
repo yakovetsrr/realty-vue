@@ -27,9 +27,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
-import BaseTag from './BaseTag.vue'
+import BaseTag from '@/components/BaseComponents/BaseTag.vue'
 
 export default defineComponent({
   components: { BaseTag },

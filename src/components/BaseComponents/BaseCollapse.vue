@@ -10,12 +10,12 @@
   </transition>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
-const cachedStyles = ref(null)
+const cachedStyles = ref<any>(null)
 
-function enter(el, done) {
+function enter(el: any, done: () => void) {
   detectAndCacheDimensions(el)
 
   setClosedDimensions(el)
@@ -25,12 +25,12 @@ function enter(el, done) {
   setTimeout(done, 500)
 }
 
-function afterEnter(el) {
+function afterEnter(el: any) {
   unsetDimensions(el)
   clearCachedDimensions()
 }
 
-function leave(el, done) {
+function leave(el: any, done: () => void) {
   detectAndCacheDimensions(el)
 
   setOpenedDimensions(el)
@@ -40,12 +40,12 @@ function leave(el, done) {
   setTimeout(done, 500)
 }
 
-function afterLeave(el) {
+function afterLeave(el: any) {
   unsetDimensions(el)
   clearCachedDimensions()
 }
 
-function detectAndCacheDimensions(el) {
+function detectAndCacheDimensions(el: any) {
   if (cachedStyles.value) return
 
   cachedStyles.value = detectRelevantDimensions(el)
@@ -55,31 +55,31 @@ function clearCachedDimensions() {
   cachedStyles.value = null
 }
 
-function detectRelevantDimensions(el) {
+function detectRelevantDimensions(el: any) {
   return {
     height: el.offsetHeight + 'px',
   }
 }
 
-function setClosedDimensions(el) {
+function setClosedDimensions(el: any) {
   Object.keys(cachedStyles.value).forEach((key) => {
     el.style[key] = '0'
   })
 }
 
-function setOpenedDimensions(el) {
+function setOpenedDimensions(el: any) {
   Object.keys(cachedStyles.value).forEach((key) => {
     el.style[key] = cachedStyles.value[key]
   })
 }
 
-function unsetDimensions(el) {
+function unsetDimensions(el: any) {
   Object.keys(cachedStyles.value).forEach((key) => {
     el.style[key] = ''
   })
 }
 
-function forceRepaint(el) {
+function forceRepaint(el: HTMLElement) {
   getComputedStyle(el)['height']
 }
 </script>

@@ -7,52 +7,33 @@
           :items="flatOptions"
           label="Тип недвижимости"
         />
-        <VBtn>1</VBtn>
-        <VBtn>2</VBtn>
-        <VBtn>3</VBtn>
-        <VBtn>4</VBtn>
-        <div>
-          <label>Стоимость, млн. ₽</label>
-          <div>
-            <input
-              type="text"
-              value="100"
-            />
-            <input
-              :class="$style.inputAlignTextRight"
-              type="text"
-              value="200"
-            />
-          </div>
-          <VRangeSlider />
-        </div>
-        <div :class="$style.slider">
-          <label>Площадь, м2</label>
-          <div>
-            <input
-              type="text"
-              value="1"
-            />
-            <input
-              :class="$style.inputAlignTextRight"
-              type="text"
-              value="2"
-            />
-          </div>
-          <VRangeSlider :class="$style.slider" />
-        </div>
+        <RoomsFilter />
+        <RangeFilter
+          :min="0"
+          :max="100"
+          >Стоимость, млн. ₽</RangeFilter
+        >
+
+        <RangeFilter
+          :min="0"
+          :max="100"
+          >Площадь, м2</RangeFilter
+        >
       </div>
     </div>
 
     <button @click="active = !active">Расширенный фильтр</button>
-    <BaseColapse>
-      <div v-if="active">
-        <div :class="$style.expationPanelText">
-          <VSelect
-            :class="$style.select"
-            :items="doneOptions"
-            label="Готовность"
-          />
+    <BaseCollapse>
+      <div
+        v-if="active"
+        :class="$style.filterPage"
+      >
+        <div :class="$style.collapse">
+          <RangeFilter
+            :min="1"
+            :max="26"
+            >Этаж</RangeFilter
+          >
           <VSelect
             :class="$style.select"
             :items="finishingOptions"
@@ -61,26 +42,17 @@
           <VSelect
             :class="$style.select"
             :items="viewWindowOptios"
-            label="Вид из окна"
+            label="Тип недвижимости"
           />
-          <div :class="$style.slider">
-            <label>Этаж</label>
-            <div>
-              <input
-                type="text"
-                value="1"
-              />
-              <input
-                :class="$style.inputAlignTextRight"
-                type="text"
-                value="10"
-              />
-            </div>
-            <VRangeSlider :class="$style.slider" />
-          </div>
+          <VSelect
+            :class="$style.select"
+            :items="viewWindowOptios"
+            label="Тип недвижимости"
+          />
         </div>
       </div>
-    </BaseColapse>
+    </BaseCollapse>
+
     <div :class="$style.filterResults">
       <div :class="$style.divSelect">
         <VSelect
@@ -108,12 +80,14 @@
 
 <script lang="ts">
 import RealtyObjectCard from '@/components/RealtyObjectCard.vue'
-import BaseColapse from '@/components/BaseColapse.vue'
+import BaseCollapse from '@/components/BaseComponents/BaseCollapse.vue'
+import RangeFilter from '@/components/BaseComponents/RangeFilter.vue'
+import RoomsFilter from '@/components/BaseComponents/RoomsFilter.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'FilterPage',
-  components: { RealtyObjectCard, BaseColapse },
+  components: { RealtyObjectCard, BaseCollapse, RangeFilter, RoomsFilter },
   data() {
     return {
       active: false,
@@ -149,11 +123,13 @@ export default defineComponent({
 </script>
 
 <style module>
-.select {
-  width: 330px;
+.container {
+  margin: 0 auto;
+  width: 1560px;
 }
+
 .filterPage {
-  padding: 12px 12px;
+  padding-top: 12px;
 }
 
 .filter {
@@ -161,35 +137,23 @@ export default defineComponent({
   justify-content: center;
   gap: 18px;
 }
-.divSlider {
-  width: 50%;
-}
-.divInput {
-  display: flex;
-  justify-content: space-between;
-}
-.inputAlignTextRight {
-  text-align: right;
-}
-.expationPanelText {
-  display: inline-flex;
-  justify-content: center;
-  gap: 14px;
-}
-.container {
-  margin: 0 auto;
-  width: 1460px;
+
+.select {
+  width: 330px;
+  max-width: 330px;
+  height: 56px;
 }
 
 .filterResults {
-  padding: 12px 12px;
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.divSelect {
-  width: 200px;
+.collapse {
+  display: flex;
+  gap: 18px;
 }
 
 .switch {

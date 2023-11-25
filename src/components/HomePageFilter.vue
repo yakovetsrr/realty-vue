@@ -50,7 +50,13 @@
   </div>
 </template>
 
-<script></script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'BaseTag',
+})
+</script>
 <style module>
 .homePageFiler {
   padding: 12px 12px;
