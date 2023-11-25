@@ -43,45 +43,44 @@
         </div>
       </div>
     </div>
-    <VExpansionPanels>
-      <VExpansionPanel>
-        <VExpansionPanelTitle>Item</VExpansionPanelTitle>
-        <VExpansionPanelText>
-          <div :class="$style.expationPanelText">
-            <VSelect
-              :class="$style.select"
-              :items="doneOptions"
-              label="Готовность"
-            />
-            <VSelect
-              :class="$style.select"
-              :items="finishingOptions"
-              label="Отделка"
-            />
-            <VSelect
-              :class="$style.select"
-              :items="viewWindowOptios"
-              label="Вид из окна"
-            />
-            <div :class="$style.slider">
-              <label>Этаж</label>
-              <div>
-                <input
-                  type="text"
-                  value="1"
-                />
-                <input
-                  :class="$style.inputAlignTextRight"
-                  type="text"
-                  value="10"
-                />
-              </div>
-              <VRangeSlider :class="$style.slider" />
+
+    <button @click="active = !active">Расширенный фильтр</button>
+    <BaseColapse>
+      <div v-if="active">
+        <div :class="$style.expationPanelText">
+          <VSelect
+            :class="$style.select"
+            :items="doneOptions"
+            label="Готовность"
+          />
+          <VSelect
+            :class="$style.select"
+            :items="finishingOptions"
+            label="Отделка"
+          />
+          <VSelect
+            :class="$style.select"
+            :items="viewWindowOptios"
+            label="Вид из окна"
+          />
+          <div :class="$style.slider">
+            <label>Этаж</label>
+            <div>
+              <input
+                type="text"
+                value="1"
+              />
+              <input
+                :class="$style.inputAlignTextRight"
+                type="text"
+                value="10"
+              />
             </div>
+            <VRangeSlider :class="$style.slider" />
           </div>
-        </VExpansionPanelText>
-      </VExpansionPanel>
-    </VExpansionPanels>
+        </div>
+      </div>
+    </BaseColapse>
     <div :class="$style.filterResults">
       <div :class="$style.divSelect">
         <VSelect
@@ -97,6 +96,7 @@
         <label>Список</label>
       </div>
     </div>
+
     <div :class="$style.cardContainer">
       <RealtyObjectCard />
       <RealtyObjectCard />
@@ -108,13 +108,15 @@
 
 <script lang="ts">
 import RealtyObjectCard from '@/components/RealtyObjectCard.vue'
+import BaseColapse from '@/components/BaseColapse.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'FilterPage',
-  components: { RealtyObjectCard },
+  components: { RealtyObjectCard, BaseColapse },
   data() {
     return {
+      active: false,
       flatOptions: ['Квартира', 'Апартаменты'],
       doneOptions: ['Вторичка', 'Новостройка'],
       finishingOptions: ['Черновая отделка', 'Чистовая отделка'],
@@ -125,7 +127,23 @@ export default defineComponent({
         'По росту площади',
         'По убыванию стоимосит',
       ],
+      collapseVisible: false,
     }
+  },
+
+  async mounted() {
+    console.log('mounted')
+    const response = await fetch('/api/filter')
+    const res = await response.json()
+
+    console.log('res', res)
+  },
+
+  methods: {
+    handleCollapse() {
+      this.collapseVisible = !this.collapseVisible
+      console.log('click', this.collapseVisible)
+    },
   },
 })
 </script>
