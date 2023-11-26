@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 import FlatDetailsHero from './components/FlatDetailsHero.vue'
 import FlatSimilar from './components/FlatsSimilar.vue'

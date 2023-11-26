@@ -1,12 +1,21 @@
 <template>
   <div :class="$style.wrapper">
-    <VBtn :class="$style.roomsBtn">Студия</VBtn>
-    <VBtn :class="$style.roomsBtn">1</VBtn>
-    <VBtn :class="$style.roomsBtn">2</VBtn>
-    <VBtn :class="$style.roomsBtn">3</VBtn>
-    <VBtn :class="$style.roomsBtn">4</VBtn>
+    <VBtn
+      v-for="item in specs"
+      :key="item.id"
+      :class="$style.roomsBtn"
+      >{{ item.name === '0' ? 'Студия' : item.name }}</VBtn
+    >
   </div>
 </template>
+<script lang="ts" setup>
+import { RealtyObjectFitlerSpecsDto } from '@/api/realty-object'
+
+defineProps<{
+  specs: RealtyObjectFitlerSpecsDto['rooms']
+}>()
+</script>
+
 <style module>
 .wrapper {
   display: flex;

@@ -13,7 +13,7 @@ const routes = [
       {
         path: '/filter',
         name: 'Filter',
-        component: () => import('@/views/FilterPage.vue'),
+        component: () => import('@/views/filter/FilterPage.vue'),
       },
       {
         path: '/filter/:id',

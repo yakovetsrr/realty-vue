@@ -2,19 +2,22 @@
   <div :class="$style.filter">
     <VSelect
       :class="$style.select"
-      :items="flatOptions"
+      :items="specs?.type"
+      item-value="id"
+      item-title="name"
+      clearable
       label="Тип недвижимости"
     />
-    <RoomsFilter />
+    <RoomsFilter :specs="specs.rooms" />
     <RangeFilter
-      :min="0"
-      :max="100"
+      :min="specs?.price.min"
+      :max="specs?.price.max"
       >Стоимость, млн. ₽</RangeFilter
     >
 
     <RangeFilter
-      :min="0"
-      :max="100"
+      :min="specs?.area.min"
+      :max="specs?.area.max"
       >Площадь, м2</RangeFilter
     >
   </div>
@@ -22,10 +25,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { RealtyObjectFitlerSpecsDto } from '@/api/realty-object'
 import RoomsFilter from '@/components/Filter/RoomsFilter.vue'
 import RangeFilter from '@/components/Filter/RangeFilter.vue'
 
-const flatOptions = ref(['Квартира', 'Апартаменты'])
+defineProps<{
+  specs: RealtyObjectFitlerSpecsDto
+}>()
 </script>
 
 <style module>

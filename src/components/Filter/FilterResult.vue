@@ -7,7 +7,12 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { RealtyObjectDto } from '@/api/realty-object'
 import RealtyObjectCard from '@/components/RealtyObjectCard.vue'
+
+defineProps<{
+  data: RealtyObjectDto[]
+}>()
 </script>
 
 <style module>

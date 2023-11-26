@@ -8,19 +8,25 @@
       >
         <div :class="$style.collapse">
           <RangeFilter
-            :min="1"
-            :max="26"
+            :min="specs?.floor.min"
+            :max="specs?.floor.max"
             >Этаж</RangeFilter
           >
           <VSelect
             :class="$style.select"
-            :items="finishingOptions"
+            :items="specs.furnish"
+            item-title="name"
+            item-value="id"
+            clearable
             label="Отделка"
           />
           <VSelect
             :class="$style.select"
-            :items="propertyOptios"
-            label="Тип недвижимости"
+            :items="specs.property"
+            item-title="name"
+            item-value="id"
+            clearable
+            label="Класс недвижимости"
           />
         </div>
       </div>
@@ -30,8 +36,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { RealtyObjectFitlerSpecsDto } from '@/api/realty-object'
 import BaseCollapse from '@/components/BaseComponents/BaseCollapse.vue'
 import RangeFilter from '@/components/Filter/RangeFilter.vue'
+
+defineProps<{
+  specs: RealtyObjectFitlerSpecsDto
+}>()
 
 const finishingOptions = ref(['Черновая отделка', 'Чистовая отделка'])
 const propertyOptios = ref(['Бизнес', 'Комфорт'])
