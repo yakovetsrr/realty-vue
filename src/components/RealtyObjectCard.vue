@@ -40,8 +40,8 @@ export default defineComponent({
 .cardFlatContent {
   display: flex;
   flex-direction: column;
-  height: 564px;
-  width: 342px;
+  height: 600px;
+  width: 400px;
   border-radius: 6px;
   border: 1px solid black;
   padding: 18px 20px;
