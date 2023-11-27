@@ -2,11 +2,10 @@
   <div :class="$style.cardFlatContent">
     <div :class="$style.header">
       <div>
-        <p>Ключи в 2025 года</p>
-        <p>2 этаж</p>
+        <p>Этаж {{ realtyObject.floor }}</p>
       </div>
 
-      <BaseTag> Комфорт </BaseTag>
+      <BaseTag> {{ realtyObject.property.name }} </BaseTag>
     </div>
     <div :class="$style.divCardImg">
       <img
@@ -15,24 +14,45 @@
       />
     </div>
     <div :class="$style.params">
-      <p>1-комнатная квартира 35,2 м<sup>2</sup></p>
-      <p>Номер квартиры 14</p>
-      <p :class="$style.costText">14 768 000 Р</p>
+      <p>
+        {{ realtyObject.rooms }}-комнатная {{ realtyObject.area }} м<sup>2</sup>
+      </p>
+      <p>Номер {{ realtyObject.number }}</p>
+      <p :class="$style.costText">
+        Стоимость {{ splitThousands(realtyObject.price) }} ₽
+      </p>
     </div>
-    <div :class="$style.tags">
-      <BaseTag> предложение</BaseTag>
-      <BaseTag> Лучшее</BaseTag>
-      <BaseTag> +1</BaseTag>
+    <div
+      v-if="realtyObject.benefits?.length"
+      :class="$style.tags"
+    >
+      <BaseTag
+        v-for="benefit in benefits"
+        :key="benefit.id"
+      >
+        {{ benefit.name }}</BaseTag
+      >
+      <BaseTag v-if="other?.length"> + {{ other.length }}</BaseTag>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { RealtyObjectDto } from '@/api/realty-object'
+import { splitThousands } from '@/utils/splitThousands'
 import BaseTag from '@/components/BaseComponents/BaseTag.vue'
+import { computed } from 'vue'
 
-export default defineComponent({
-  components: { BaseTag },
+const props = defineProps<{
+  realtyObject: RealtyObjectDto
+}>()
+
+const benefits = computed(() => {
+  return props.realtyObject.benefits?.slice(0, 2)
+})
+
+const other = computed(() => {
+  return props.realtyObject.benefits?.slice(2) ?? []
 })
 </script>
 

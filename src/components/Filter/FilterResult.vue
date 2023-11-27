@@ -1,9 +1,10 @@
 <template>
   <div :class="$style.cardContainer">
-    <RealtyObjectCard />
-    <RealtyObjectCard />
-    <RealtyObjectCard />
-    <RealtyObjectCard />
+    <RealtyObjectCard
+      v-for="realtyObject in data"
+      :key="realtyObject.id"
+      :realty-object="realtyObject"
+    />
   </div>
 </template>
 <script lang="ts" setup>

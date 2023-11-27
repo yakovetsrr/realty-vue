@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.filter">
     <VSelect
-      :class="$style.select"
-      :items="specs?.type"
+      v-model="data.type"
+      :items="specs.type"
       item-value="id"
       item-title="name"
       clearable
@@ -10,28 +10,55 @@
     />
     <RoomsFilter :specs="specs.rooms" />
     <RangeFilter
-      :min="specs?.price.min"
-      :max="specs?.price.max"
+      :max="1"
+      :min="1"
       >Стоимость, млн. ₽</RangeFilter
     >
 
-    <RangeFilter
+    <!-- <RangeFilter
       :min="specs?.area.min"
       :max="specs?.area.max"
       >Площадь, м2</RangeFilter
-    >
+    > -->
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useVModel } from '@vueuse/core'
 import { RealtyObjectFitlerSpecsDto } from '@/api/realty-object'
 import RoomsFilter from '@/components/Filter/RoomsFilter.vue'
 import RangeFilter from '@/components/Filter/RangeFilter.vue'
 
-defineProps<{
+interface Values {
+  type?: string
+  minPrice?: number
+  maxPrice?: number
+}
+
+export interface Props {
+  modelValue: Values
   specs: RealtyObjectFitlerSpecsDto
+}
+
+const props = defineProps<Props>()
+
+const emit = defineEmits<{
+  (event: 'change'): void
+  (event: 'update:modelValue', props: Props['modelValue']): void
 }>()
+
+const data = useVModel(props, 'modelValue', emit)
+
+watch(
+  () => data.value,
+  () => {
+    emit('change')
+  },
+  {
+    deep: true,
+  },
+)
 </script>
 
 <style module>

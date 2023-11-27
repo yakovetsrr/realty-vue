@@ -37,6 +37,9 @@ export interface RealtyObjectDto {
   plan: string
   originalPrice: number
   price: number
+  property: { id: number; name: string }
+  furnish?: FilterSelectSpec[]
+  benefits?: FilterSelectSpec[]
 }
 
 interface MetaResponse {
@@ -50,9 +53,10 @@ export interface GetRealtyObjectsResponse {
   meta: MetaResponse
 }
 
-export const getRealtyObjects = async () => {
+export const getRealtyObjects = async (queryParams = '') => {
   //   await new Promise((r) => setTimeout(r, 5000))
-  return (await $api.get<GetRealtyObjectsResponse>('/filter')).data
+  return (await $api.get<GetRealtyObjectsResponse>(`/filter?${queryParams}`))
+    .data
 }
 
 export const getRealtyObjectsFilterSpecs = async () => {

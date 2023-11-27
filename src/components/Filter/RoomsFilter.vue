@@ -4,7 +4,7 @@
       v-for="item in specs"
       :key="item.id"
       :class="$style.roomsBtn"
-      >{{ item.name === '0' ? 'Студия' : item.name }}</VBtn
+      >{{ item.id === 0 ? 'Студия' : item.name }}</VBtn
     >
   </div>
 </template>

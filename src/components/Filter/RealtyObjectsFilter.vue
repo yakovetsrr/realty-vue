@@ -2,7 +2,11 @@
   <div :class="$style.filterPage">
     <div v-if="isResultLoading">Loading...</div>
     <template v-else>
-      <FilterCommon :specs="specs as RealtyObjectFitlerSpecsDto" />
+      <FilterCommon
+        v-model="values"
+        :specs="specs as RealtyObjectFitlerSpecsDto"
+        @change="handleChange"
+      />
       <FilterExpanded :specs="specs as RealtyObjectFitlerSpecsDto" />
       <FilterControls />
       <FilterResult
@@ -15,6 +19,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import qs from 'qs'
 import {
   getRealtyObjects,
   getRealtyObjectsFilterSpecs,
@@ -26,9 +31,21 @@ import FilterExpanded from '@/components/Filter/FilterExpanded.vue'
 import FilterControls from '@/components/Filter/FilterControls.vue'
 import FilterResult from '@/components/Filter/FilterResult.vue'
 
+interface Values {
+  type?: string
+  minPrice?: number
+  maxPrice?: number
+}
+
 const isResultLoading = ref(true)
 const filter = ref<GetRealtyObjectsResponse | null>(null)
 const specs = ref<RealtyObjectFitlerSpecsDto>()
+
+const values = ref<Values>({
+  type: undefined,
+  minPrice: 0,
+  maxPrice: 10,
+})
 
 onMounted(async () => {
   try {
@@ -40,6 +57,24 @@ onMounted(async () => {
     isResultLoading.value = false
   }
 })
+
+const handleChange = async () => {
+  const copyValues = JSON.parse(JSON.stringify(values.value))
+  Object.keys(copyValues).forEach((key) => {
+    if (copyValues[key] === null) {
+      delete copyValues[key]
+    }
+  })
+  const queryParams = qs.stringify(copyValues)
+  try {
+    isResultLoading.value = true
+    filter.value = await getRealtyObjects(queryParams)
+  } catch (error) {
+    console.error('ERROR', error)
+  } finally {
+    isResultLoading.value = false
+  }
+}
 </script>
 
 <style module>
