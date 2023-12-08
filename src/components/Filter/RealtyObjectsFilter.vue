@@ -7,7 +7,10 @@
         :specs="specs as RealtyObjectFitlerSpecsDto"
         @change="handleChange"
       />
-      <FilterExpanded :specs="specs as RealtyObjectFitlerSpecsDto" />
+      <FilterExpanded
+        v-model="values"
+        :specs="specs as RealtyObjectFitlerSpecsDto"
+      />
       <FilterControls />
       <FilterResult
         :data="filter?.data ?? []"
@@ -33,8 +36,13 @@ import FilterResult from '@/components/Filter/FilterResult.vue'
 
 interface Values {
   type?: string
+  furnish?: string
+  property?: string
+  rooms?: number[]
   minPrice?: number
   maxPrice?: number
+  minFloor?: number
+  maxFloor?: number
 }
 
 const isResultLoading = ref(true)
@@ -43,14 +51,24 @@ const specs = ref<RealtyObjectFitlerSpecsDto>()
 
 const values = ref<Values>({
   type: undefined,
-  minPrice: 0,
-  maxPrice: 10,
+  furnish: undefined,
+  rooms: [],
+  property: undefined,
+  minPrice: undefined,
+  maxPrice: undefined,
+  minFloor: undefined,
+  maxFloor: undefined,
 })
 
 onMounted(async () => {
   try {
     filter.value = await getRealtyObjects()
     specs.value = await getRealtyObjectsFilterSpecs()
+
+    values.value.minPrice = specs.value.price.min
+    values.value.maxPrice = specs.value.price.max
+    values.value.maxFloor = specs.value.floor.max
+    values.value.minFloor = specs.value.floor.min
   } catch (error) {
     console.error('ERROR', error)
   } finally {

@@ -9,12 +9,15 @@
       clearable
       label="Тип недвижимости"
     />
-    <RoomsFilter :specs="specs.rooms" />
+    <RoomsFilter
+      v-model:rooms="data.rooms"
+      :specs="specs.rooms"
+    />
     <RangeFilter
+      v-model:model-max="data.maxPrice"
+      v-model:model-min="data.minPrice"
       min-label="Цена от"
       max-label="Цена до"
-      :max="1"
-      :min="1"
     />
 
     <!-- <RangeFilter
@@ -26,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { RealtyObjectFitlerSpecsDto } from '@/api/realty-object'
 import RoomsFilter from '@/components/Filter/RoomsFilter.vue'
@@ -34,6 +37,7 @@ import RangeFilter from '@/components/Filter/RangeFilter.vue'
 
 interface Values {
   type?: string
+  rooms?: number[]
   minPrice?: number
   maxPrice?: number
 }
@@ -41,8 +45,6 @@ interface Values {
 export interface Props {
   modelValue: Values
   specs: RealtyObjectFitlerSpecsDto
-  minLabel: string
-  maxLabel: string
 }
 
 const props = defineProps<Props>()
