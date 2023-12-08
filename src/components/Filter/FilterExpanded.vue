@@ -8,10 +8,11 @@
       >
         <div :class="$style.collapse">
           <RangeFilter
+            max-label="Этаж до"
+            min-label="Этаж от"
             :min="specs?.floor.min"
             :max="specs?.floor.max"
-            >Этаж</RangeFilter
-          >
+          />
           <VSelect
             :class="$style.select"
             :items="specs.furnish"

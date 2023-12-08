@@ -2,13 +2,15 @@
   <div :class="$style.wrapper">
     <slot />
     <div :class="$style.inputs">
-      <input
+      <v-text-field
         v-model="minValue"
         :class="$style.input"
+        :label="minLabel"
         type="number"
       />
-      <input
+      <v-text-field
         v-model="maxValue"
+        :label="maxLabel"
         :class="[$style.input, $style.sliderTextRight]"
         type="number"
       />
@@ -30,6 +32,8 @@ export interface Props {
   max?: number
   modelMin?: any
   modelMax?: any
+  minLabel: string
+  maxLabel: string
 }
 
 const props = defineProps<Props>()
@@ -58,11 +62,12 @@ const maxValue = useVModel(props, 'modelMax', emit)
 }
 
 .inputs {
+  display: flex;
   width: 100%;
+  gap: 12px;
 }
 
 .input {
-  width: 50%;
 }
 .sliderTextRight {
   text-align: right;

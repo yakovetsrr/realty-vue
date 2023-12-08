@@ -2,6 +2,7 @@
   <div :class="$style.filter">
     <VSelect
       v-model="data.type"
+      :class="$style.select"
       :items="specs.type"
       item-value="id"
       item-title="name"
@@ -10,10 +11,11 @@
     />
     <RoomsFilter :specs="specs.rooms" />
     <RangeFilter
+      min-label="Цена от"
+      max-label="Цена до"
       :max="1"
       :min="1"
-      >Стоимость, млн. ₽</RangeFilter
-    >
+    />
 
     <!-- <RangeFilter
       :min="specs?.area.min"
@@ -39,6 +41,8 @@ interface Values {
 export interface Props {
   modelValue: Values
   specs: RealtyObjectFitlerSpecsDto
+  minLabel: string
+  maxLabel: string
 }
 
 const props = defineProps<Props>()
@@ -64,7 +68,6 @@ watch(
 <style module>
 .filter {
   display: inline-flex;
-  justify-content: center;
   gap: 18px;
 }
 .select {
